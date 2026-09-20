@@ -3,13 +3,13 @@ from typing import List,Dict,Optional,Annotated
 class Patient(BaseModel):
 
 
-    name : str = Annotated(Field(max_length=50))
+    name : Annotated[str, Field(max_length=50, title='Name of the Patient',description='Give the name of the patient in less than 50 char', examples=['Nitish','Amit'])]
     email : EmailStr
     linkedin_url : AnyUrl
     age : int = Field(gt=0, lt=120)
     weight: float = Field(gt=0)
-    married: bool = False
-    allergies: Optional[List[str]] = Field(max_length=10)
+    married: Annotated[bool, Field(default=None,description='Is the patient married or not ')]
+    allergies: Annotated[Optional[List[str]],Field(default=10)]
     contact_details : Optional[Dict[str,str]] = None
 
 def insert_patient_data(patient: Patient):
